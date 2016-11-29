@@ -1,0 +1,11 @@
+- hosts: proxy
+  remote_user: root
+  roles:
+    - common
+    - user
+
+- hosts: production
+  remote_user: root
+  roles:
+    - common
+    - user

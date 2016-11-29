@@ -1,0 +1,10 @@
+- name: python pip
+  become: true
+  apt: name='{{ item }}' state=present
+  with_items:
+    - python-dev
+    - python-pip
+
+- name: fabric install
+  become: true
+  command: pip install fabric

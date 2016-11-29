@@ -1,0 +1,6 @@
+- name: curl install
+  apt: name=curl state=present
+
+- name: make install
+  apt: name=build-essential state=present
+

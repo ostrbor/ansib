@@ -1,0 +1,9 @@
+- name: docker-compose install
+  shell: curl -L https://github.com/docker/compose/releases/download/1.8.1/docker-compose-`(uname -s)`-`(uname -m)` > /usr/local/bin/docker-compose
+
+- name: chmod docker-compose
+  file: path=/usr/local/bin/docker-compose mode="u+x,g+x,o+x"
+
+- name: get version if successfull installation
+  command: docker-compose --version
+

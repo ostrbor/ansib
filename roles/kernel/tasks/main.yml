@@ -1,0 +1,21 @@
+# upgrade!
+- name: Prepare To Update
+  apt:
+    name: apt-utils
+    update_cache: yes
+    upgrade: dist
+  tags:
+    - kernel
+
+- name: Update Kernel
+  apt:
+    name: linux-image-3.16.0-4-amd64
+  tags:
+    - kernel
+
+# hangs
+- name: Reboot
+  command: shutdown -r now
+  tags:
+    - kernel
+  ignore_errors: true

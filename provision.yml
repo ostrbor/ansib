@@ -1,0 +1,15 @@
+- hosts: production
+  become: true
+  remote_user: admin
+  roles:
+    - utils
+    - docker-jessie
+    - git
+    - byobu
+    - docker-compose
+
+- hosts: proxy
+  become: true
+  remote_user: admin
+  roles:
+    - proxy

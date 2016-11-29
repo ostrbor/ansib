@@ -1,0 +1,40 @@
+- name: Create admin group
+  group: name=admin state=present
+
+- name: Paswordless sudo for admin group
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%admin'
+    line: '%admin ALL=(ALL) NOPASSWD: ALL' 
+
+- name: Create deploy group
+  group: name=deploy state=present
+  
+- name: Create admin user
+  user:
+    name=admin
+    password={{ admin_password }}
+    group=admin
+    groups=sudo
+    append=yes
+    shell=/bin/bash
+
+- name: Add admin authorized key
+  authorized_key:
+    user=admin
+    key="{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+    state=present
+
+- name: Create deploy user
+  user:
+    name=deploy
+    password={{ deploy_password }}
+    group=deploy
+    shell=/bin/bash
+
+- name: Add deployer authorized key
+  authorized_key:
+    user=deploy
+    key="{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+    state=present

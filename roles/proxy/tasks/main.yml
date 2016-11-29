@@ -1,0 +1,14 @@
+- name: Tiny Proxy
+  apt:
+    name: tinyproxy
+    update_cache: yes
+  
+- name: Copy Config
+  copy:
+    src: ../files/tinyproxy.conf
+    dest: /etc/tinyproxy.conf
+
+- name: Restart Proxy
+  service:
+    name: tinyproxy
+    state: restarted

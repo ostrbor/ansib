@@ -1,0 +1,9 @@
+- name: byobu Install
+  apt: name=byobu state=present
+
+- name: byobu enable
+  ignore_errors: yes
+  expect:
+    command: byobu-enable
+    responses:
+      (?i)enter: ''
